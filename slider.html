@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>js-slider </title>
     <style>
         body{
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: pink;
+            background-color: black;
         }
 
         #main{
@@ -20,24 +20,23 @@
             overflow: hidden;
         }
         #main img {
-            width: 60%;
-            height: 750px;
+            width: 40%;
+            height: 450px;
 
         }
-        #toggle{
+        #more{
             display: block;
             margin: 20px auto;
             padding: 10px 20px;
-            font-size: 15px;
-            background-color: skyblue;
-            color: white;
+            font-size: 25px;
+            background-color: white;
+            color: black;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            border-radius: 10px;
         }
-        #toggle:hover{
-            background-color: blue;
+        #more:hover{
+            background-color: red;
+            color: white;
         }
     </style>
 </head>
@@ -45,62 +44,62 @@
     <div id="main">
     </div>
     <div>
-       <button id="toggle" onclick="startAndStop()">Start</button>
+       <button id="more" onclick="startAndStop()">Start</button>
     </div>
 </body>
 </html>
 
 <script>
     let container = document.getElementById("main");
-    let toggle = document.getElementById("toggle");
-    let imgArr=[
+    let more = document.getElementById("more");
+    let imglist=[
         "https://th.bing.com/th/id/OIP.CU-NjsnR2htfew0_mP0xfQHaEK?rs=1&pid=ImgDetMain",
+        "https://imgs.search.brave.com/DCpE2gx8PPrjCKrDRz-htIPBBxBpA_m0eANcEFqg4U0/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1QlpXUTFObU14/TUdJdE1qZzJNQzAw/TW1RNUxUZzJZamt0/T0RObFl6a3dZamRo/WkRjeVhrRXlYa0Zx/Y0dkZVFYVnlNelEz/TnprNU1UVUAuanBn",
+        "https://imgs.search.brave.com/ELPxdyfbSG77UfVPoET6HLW7Cazm3e2dXXCm3QV54p0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzFiLzk2/L2UyLzFiOTZlMjM0/YTEyODczYTcxOWEz/MGU2NjA1M2I5ODlh/LmpwZw",
+        "https://imgs.search.brave.com/t8hNZNzrO532yFEPzAXzMAQiVFdlbDBVBDlYbkj1Adw/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzgwL2Yz/L2RmLzgwZjNkZjI0/ZjcxYmRlYjZhOGUy/ZjFlMDBmNGRiZWIx/LmpwZw",
         "https://theskincareedit.com/.image/c_limit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_700/MTk4MTgxNzY0MzMyNTI4ODMw/emma-watson-harry-potter-and-the-half-blood-prince-new-york-city-premiere-2009.jpg",
         "https://i.pinimg.com/originals/91/a5/6b/91a56b01063d817ee23f8c0689938854.jpg",
-        "https://celebmafia.com/wp-content/uploads/2017/03/emma-watson-beauty-and-the-beast-press-conference-at-the-montage-hotel-in-beverly-hills-3-5-2017-1.jpg",
-        "https://th.bing.com/th/id/OIP.h4YGLlGOKePjf2K_K_NT5gHaJQ?rs=1&pid=ImgDetMain",
+        "https://imgs.search.brave.com/Zcjut5ytOsU8AZNPmDLbR4pQg3oKywMYB3-Q2iTDNxc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzM1LzFm/L2Q5LzM1MWZkOWVl/NzlkNTRkOTQ4MDFm/Njg4MzA1NDEwYTRk/LmpwZw",
+        "https://imgs.search.brave.com/zxStwGImhFYHzd07nOxS-6f3JKYg1cKTOSY0sFe9qyY/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zdDQu/ZGVwb3NpdHBob3Rv/cy5jb20vMjE2MDc5/MTQvMjM2MjIvaS80/NTAvZGVwb3NpdHBo/b3Rvc18yMzYyMjU0/Mzgtc3RvY2stcGhv/dG8tYnJpdGlzaC1h/Y3RyZXNzLWVtbWEt/d2F0c29uLWF0dGVu/ZHMuanBn",
+        "https://imgs.search.brave.com/Eb_WQ6Z8N2bIVxKLebLG1B1Ale853Vn2MYSH-mqHpSo/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzNiLzc1/LzJjLzNiNzUyYzA4/ZTBiOGFjZTBlYjIy/ZjAxNGIzYTYyMTRl/LmpwZw",
         "https://images6.fanpop.com/image/photos/41900000/Emma-Watson-emma-watson-41990397-903-1200.jpg",
         "https://th.bing.com/th/id/OIP.uRPCyWMOfoeFE2OFG49IFAHaJQ?w=2400&h=3000&rs=1&pid=ImgDetMain",
-        "https://th.bing.com/th/id/OIP._Agq5EOV5Tq8BJ-wYIMoXQHaI4?rs=1&pid=ImgDetMain",
         "https://images5.fanpop.com/image/photos/28700000/EW-emma-watson-28754872-436-500.jpg",
+        "https://imgs.search.brave.com/fqVo8F89GuRtdAVZwKb77X1g1RAL--Tq6DGeODgTB3s/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2M1Lzgw/L2Q1L2M1ODBkNWU5/NzYxYTY1N2RmN2U2/NDllOGE2ODI1NTMy/LmpwZw",
         "https://th.bing.com/th/id/OIP.L4ZCn24yF96MlW5TLQVk1QHaIk?rs=1&pid=ImgDetMain",
         "https://images-cdn.9gag.com/photo/aNPOezv_700b.jpg",
-        "https://th.bing.com/th/id/OIP.a6PJcNvYQkH_Sn6wVrvhIgHaLI?rs=1&pid=ImgDetMain",
+        "https://imgs.search.brave.com/Z3tqdv6P5UkeJ82PkGUVBOstIwKPi38konU-HL_eeSw/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/ZC1yYXRpbmcuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDI0/LzA0L2Rpc2NvdmVy/LWhvdy1lbW1hLXdh/dHNvbjJDLWZhci1m/cm9tLWhlci1yb2xl/LWFzLWhlcm1pb25l/LWdyYW5nZXIyQy13/b3dzLXVzLXdpdGgt/aGVyLWRhcmluZy1i/ZWF1dHktbG9vay1m/b3ItaGVyLTM0dGgt/YmlydGhkYXktc2Nh/bGVkLmpwZw",
         "https://celebmafia.com/wp-content/uploads/2018/07/emma-watson-at-the-championships-at-wimbledon-in-london-07-15-2018-11.jpg",
         "https://lovelace-media.imgix.net/getty/481759185.jpg",
-        "https://th.bing.com/th/id/OIP.z0uJIHqnAo_fF_Sbmy1kXgHaI4?w=1200&h=1440&rs=1&pid=ImgDetMain",
-        "https://th.bing.com/th/id/OIP.r03gWW7hIwxUhwpHQEtM-QHaKX?w=500&h=700&rs=1&pid=ImgDetMain",
         "https://4.bp.blogspot.com/-R6uIXcosewA/Uzf0cDaS8yI/AAAAAAAAUWQ/HOiv3NdG64w/s3300/Emma+Watson+photo.filmcelebritiesactresses.blogspot-517.jpg",
-        "https://th.bing.com/th/id/OIP.2dkan8or-AME7J3Bs2OL7gHaKX?rs=1&pid=ImgDetMain",
         "https://wikigrewal.com/wp-content/uploads/2020/08/Emma-Watson-Hot-Photos-25-www.wikigrewal.com_.jpg"
     ]
 
-    let flag = false;
+    let bag = false;
     let i=0;
     let img = document.createElement("img")
-
-
-    img.src = imgArr[i]
-
+    
+    img.src = imglist[i]
+    
     function slider(){
-        if(i==imgArr.length-1){
+        if(i==imglist.length-1){
             i=0;
         }else{
             i++;
         }
-        img.src = imgArr[i]
+        img.src = imglist[i]
     }
     container.append(img)
     let intervalId ;
        function startAndStop(){
-        if(flag){
-            toggle.innerHTML="Start";
-            flag=false;
+        if(bag){
+            more.innerHTML="Start";
+            bag=false;
             clearInterval(intervalId);
         }else{
-            toggle.innerHTML="Stop";
-            flag=true;
-        intervalId =  setInterval(slider,2000);
+            more.innerHTML="Stop";
+            bag=true;
+        intervalId =  setInterval(slider,1000);
         }
     }
 
